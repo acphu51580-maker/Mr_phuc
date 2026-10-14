@@ -5,35 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mr.Phuc</title>
 <style>
-:root{--main:#ff2a2a;--main-dark:#c00000;--main-rgb:255,42,42;--main-soft:rgba(255,42,42,.15);--main-glow:rgba(255,42,42,.5);--logo-size:130px}
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
-body{min-height:100vh;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;padding:20px;overflow-x:hidden;position:relative;background-size:cover;background-repeat:no-repeat;background-attachment:fixed}
+:root{--main:#ff2a2a;--main-dark:#c000000;--main-rgb:255,42,42;--main-soft:rgba(255,42, 42,.15);--main-glow:rgba(255,42,42,.5);--logo-size:130px}
+*{margin:0;padding20:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serifpx}
+body{min-height:100vh;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;padding: var20px;overflow-x:hidden;position:relative;background-size:cover;background-repeat:no-repeat;background(---attachment:fixed}
 body.bg-hidden #stars{display:none}
 #stars{position:fixed;inset:0;z-index:0;background:radial-gradient(2px 2px at 20% 30%,#fff,transparent),radial-gradient(2px 2px at 60% 70%,#fff,transparent),radial-gradient(1px 1px at 50% 50%,#fff,transparent),radial-gradient(1px 1px at 80% 10%,#fff,transparent),radial-gradient(2px 2px at 90% 60%,#fff,transparent),radial-gradient(1px 1px at 33% 80%,#fff,transparent),radial-gradient(1px 1px at 15% 90%,#fff,transparent),radial-gradient(2px 2px at 70% 20%,#fff,transparent),radial-gradient(1px 1px at 45% 15%,#fff,transparent),radial-gradient(1px 1px at 10% 50%,#fff,transparent);background-color:#000;animation:twinkle 4s infinite alternate}
 @keyframes twinkle{0%{opacity:.6}100%{opacity:1}}
-.card{position:relative;z-index:1;width:100%;max-width:380px;background:rgba(15,15,25,.75);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(20px);border-radius:24px;padding:30px 22px 26px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6);animation:fadeUp .6s ease}
+.card{position:relative;z-index:1;width:100%;max-width:380px;background:rgba(10,10,18,.88);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(30px);border-radius:24px;padding:30px 22px 26px;text-align:center;box-shadow:0 25px 80px rgba(0,0,0,.8);animation:fadeUp .6s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-.logo-wrap{width:var(--logo-size);height:var(--logo-size);margin:0 auto 16px;border-radius:50%;overflow:hidden;cursor:pointer;position:relative;border:3px solid var(--main);box-shadow:0 0 30px var(--main-glow),inset 0 0 20px var(--main-soft);transition:.3s;user-select:none;animation:pulseGlow 3s infinite}
-@keyframes pulseGlow{0%,100%{box-shadow:0 0 30px var(--main-glow),inset 0 0 20px var(--main-soft)}50%{box-shadow:0 0 50px var(--main-glow),inset 0 0 30px var(--main-soft)}}
+.logo-wrap{width:var(--logo-size);height:var(--logo-size);margin:0 auto 16px;border-radius:50%;overflow:hidden;cursor:pointer;position:relative;border:3px solid var(--main);box-shadow:0 0 30px var(--main-glow),inset 0 0 20px var(--main-soft);transition:.3s;user-select:none;animation:pulseGlow 3s infinite;background:linear-gradient(135deg,#1a0000,#4a0000)}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 30px var(--main-glow),inset 0 main-soft)}50%{box-shadow:0 0 50px var(--main-glow),inset 0 0 30px var(--main-soft)}}
 .logo-wrap img{width:100%;height:100%;object-fit:cover;object-position:center}
-.logo-wrap .ph{width:100%;height:100%;background:linear-gradient(135deg,#1a0000,#4a0000);display:flex;align-items:center;justify-content:center;font-size:calc(var(--logo-size) * 0.4);font-weight:900;color:var(--main)}
+.logo-wrap .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:calc(var(--logo-size) * 0.5);font-weight:900;color:var(--main);text-shadow:0 0 30px var(--main-glow)}
 .logo-wrap:hover{transform:scale(1.05)}
-.name{font-size:24px;font-weight:900;background:linear-gradient(135deg,var(--main),var(--main));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;letter-spacing:.5px}
-.tagline{font-size:12px;color:var(--main);opacity:.7;margin-bottom:14px;letter-spacing:2px;font-weight:600}
-.desc{font-size:13px;color:#a0a0b0;line-height:1.6;margin-bottom:22px;padding:0 6px}
+.name{font-size:26px;font-weight:900;color:var(--main);text-shadow:0 2px 12px rgba(0,0,0,.8);margin-bottom:6px;letter-spacing:.5px}
+.tagline{font-size:12px;color:var(--main);opacity:.85;margin-bottom:14px;letter-spacing:2px;font-weight:600;text-shadow:0 1px 6px rgba(0,0,0,.8)}
+.desc{font-size:13px;color:#d0d0e0;line-height:1.6;margin-bottom:22px;padding:0 6px;text-shadow:0 1px 6px rgba(0,0,0,.9);font-weight:500}
 .links{display:flex;flex-direction:column;gap:10px}
-.link-btn{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;color:#fff;text-decoration:none;font-size:14px;font-weight:600;transition:.25s;cursor:pointer}
+.link-btn{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.15);border-radius:14px;color:#fff;text-decoration:none;font-size:14px;font-weight:700;transition:.25s;cursor:pointer;backdrop-filter:blur(10px);box-shadow:0 4px 12px rgba(0,0,0,.4)}
 .link-btn:hover{background:var(--main-soft);border-color:var(--main);transform:translateX(4px)}
 .link-btn .ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;overflow:hidden}
-.link-btn .txt{flex:1;text-align:left}
-.link-btn .arr{color:#666;font-size:16px}
+.link-btn .txt{flex:1;text-align:left;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.link-btn .arr{color:#888;font-size:16px}
 .ico-facebook{background:linear-gradient(135deg,#1877f2,#0c5dc7)}.ico-messenger{background:linear-gradient(135deg,#0084ff,#00c6ff)}.ico-tiktok{background:linear-gradient(135deg,#000,#25f4ee,#fe2c55)}.ico-zalo{background:linear-gradient(135deg,#0068ff,#0084ff)}.ico-phone{background:linear-gradient(135deg,#00c853,#00a844)}.ico-telegram{background:linear-gradient(135deg,#0088cc,#00aaff)}.ico-discord{background:linear-gradient(135deg,#5865f2,#4752c4)}.ico-gmail{background:linear-gradient(135deg,#ea4335,#c5221f)}.ico-youtube{background:linear-gradient(135deg,#ff0000,#cc0000)}.ico-instagram{background:linear-gradient(135deg,#e1306c,#fd1d1d,#fcb045)}.ico-twitter{background:linear-gradient(135deg,#1da1f2,#0c85d0)}.ico-group{background:linear-gradient(135deg,#00c853,#00a844)}.ico-custom{background:linear-gradient(135deg,var(--main),var(--main-dark))}.ico-link{background:linear-gradient(135deg,#888,#555)}
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:999;padding:15px;backdrop-filter:blur(4px)}
 .modal-bg.show{display:flex}
 .modal{background:#131320;border:1px solid var(--main-soft);border-radius:18px;padding:24px;max-width:420px;width:100%;max-height:90vh;overflow-y:auto;animation:pop .3s}
 @keyframes pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
-.modal h2{color:var(--main);font-size:20px;margin-bottom:16px;font-weight:800;text-align:center}
-.modal input,.modal textarea,.modal select{width:100%;padding:12px 14px;background:#0a0a14;border:1.5px solid #2a2a3a;border-radius:10px;color:#fff;font-size:14px;margin-bottom:10px;font-family:inherit}
+.modal h2{color:var(--main);font-size:}
+20px;margin-bottom:16px;font-weight:800;text-align:center.modal input,.modal textarea,.modal select{width:100%;padding:12px 14px;background:#0a0a14;border:1.5px solid #2a2a3a;border-radius:10px;color:#fff;font-size:14px;margin-bottom:10px;font-family:inherit}
 .modal input:focus,.modal textarea:focus,.modal select:focus{outline:none;border-color:var(--main);box-shadow:0 0 0 3px var(--main-soft)}
 .modal textarea{min-height:70px;resize:vertical}
 .btn{width:100%;padding:12px;background:linear-gradient(135deg,var(--main),var(--main-dark));color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;margin-top:5px;transition:.2s}
@@ -90,7 +90,7 @@ body.bg-hidden #stars{display:none}
 
 <div class="card">
   <div class="logo-wrap" id="logoWrap" onclick="countLogoClick()">
-    <div class="ph" id="logoPh">M</div>
+    <div class="ph" id="logoPh">P</div>
     <img id="logoImg" style="display:none">
   </div>
   <div class="name" id="displayName">Mr.Phuc</div>
@@ -168,9 +168,9 @@ const firebaseConfig = {
   appId: "1:922607657180:web:2d1f482bd5aa562214d419"
 };
 const IMGBB_KEY = "11fa26a3d2a300961577fa631bfc603c";
-// ✅ ADMIN MẶC ĐỊNH (sẽ bị ghi đè bởi settings.adminUser/adminPass nếu có)
 const DEFAULT_ADMIN_USER = "phuc", DEFAULT_ADMIN_PASS = "phc51580";
-const DB_PATH = "mrmuop_landing", SESSION_KEY = "mrmuop_admin_session";
+// ✅ ĐỔI PATH MỚI HOÀN TOÀN — KHÔNG DÙNG DATA CŨ
+const DB_PATH = "mrphuc_new_v1", SESSION_KEY = "mrphuc_admin_session";
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
@@ -196,6 +196,7 @@ const ICONS = [
 ];
 const TYPE_ICON = { facebook:'📘',messenger:'💌',tiktok:'🎵',zalo:'💬','zalo-group':'👥',telegram:'✈️',discord:'🎮',gmail:'📧',youtube:'▶️',instagram:'📷',twitter:'🐦',phone:'📞',custom:'⭐',link:'🔗' };
 
+// ✅ MẶC ĐỊNH HOÀN TOÀN TRỐNG
 let settings = {
   name:"Mr.Phuc", tagline:"★ HACKER - CRACKER ★",
   desc:"Chào bạn! Mình là Mr.Phuc — chuyên về các dịch vụ công nghệ, script, tool. Liên hệ mình qua các kênh bên dưới nhé!",
@@ -288,7 +289,7 @@ function render(){
   const li = document.getElementById('logoImg');
   const lp = document.getElementById('logoPh');
   if (settings.logo) { li.src = settings.logo; li.style.display = 'block'; lp.style.display = 'none'; }
-  else { li.style.display = 'none'; lp.style.display = 'flex'; lp.textContent = (settings.name || 'M').charAt(0).toUpperCase(); }
+  else { li.style.display = 'none'; lp.style.display = 'flex'; lp.textContent = (settings.name || 'P').charAt(0).toUpperCase(); }
   applyLogoStyle();
 }
 
@@ -324,7 +325,6 @@ window.countLogoClick = () => {
 window.doAdminLogin = () => {
   const u = document.getElementById('adminUser').value.trim();
   const p = document.getElementById('adminPass').value;
-  // ✅ CHECK VỚI ADMIN ĐÃ LƯU HOẶC MẶC ĐỊNH
   const validUser = settings.adminUser || DEFAULT_ADMIN_USER;
   const validPass = settings.adminPass || DEFAULT_ADMIN_PASS;
   if (u !== validUser || p !== validPass) return window.notif('Sai tên hoặc mật khẩu!', true);
@@ -365,7 +365,7 @@ function renderTabContent(){
       <button class="btn" onclick="saveInfo()">💾 Lưu thông tin</button>`;
   } else if (currentTab === 'logo') {
     c.innerHTML = `
-      ${settings.logo ? `<img class="preview" src="${settings.logo}">` : '<p style="text-align:center;color:#888;font-size:13px;margin-bottom:10px">Chưa có logo</p>'}
+      ${settings.logo ? `<img class="preview" src="${settings.logo}">` : '<p style="text-align:center;color:#888;font-size:13px;margin-bottom:10px">Chưa có logo — hiện đang dùng chữ cái đầu</p>'}
       <div class="upload-btn" onclick="document.getElementById('logoFile').click()">📷 Chọn ảnh logo</div>
       <input type="file" id="logoFile" accept="image/*" style="display:none" onchange="uploadLogo(this)">
       <p style="text-align:center;color:#888;font-size:12px;margin:8px 0">Hoặc dán link ảnh:</p>
@@ -468,8 +468,7 @@ function renderTabContent(){
       <button class="btn" onclick="saveVoice()">💾 Lưu cài đặt</button>
       <button class="btn btn-sec" onclick="testVoice()" style="margin-top:6px">🔊 Nghe thử</button>
       <button class="btn btn-danger" onclick="stopVoice()" style="margin-top:6px">⏹ Dừng đọc</button>
-      <div class="voice-preview" id="voicePreviewBox" style="margin-top:12px;display:none"><strong>📢 Đang đọc:</strong> <span id="voicePreviewText"></span></div>
-      <p style="font-size:11px;color:#666;margin-top:12px;text-align:center">💡 Giọng đọc tự động phát khi khách vào web (nếu bật Lặp lại)</p>`;
+      <div class="voice-preview" id="voicePreviewBox" style="margin-top:12px;display:none"><strong>📢 Đang đọc:</strong> <span id="voicePreviewText"></span></div>`;
   } else if (currentTab === 'account') {
     c.innerHTML = `
       <p style="font-size:13px;color:#aaa;margin-bottom:12px;text-align:center">🔑 Đổi tài khoản Admin</p>
@@ -491,21 +490,18 @@ function renderTabContent(){
   }
 }
 
-// ===== ADMIN ACCOUNT =====
+// ADMIN ACCOUNT
 window.saveAdminAccount = async () => {
   const newUser = document.getElementById('newAdminUser').value.trim();
   const oldPass = document.getElementById('oldAdminPass').value;
   const newPass = document.getElementById('newAdminPass').value;
   const confPass = document.getElementById('confirmAdminPass').value;
-  
   const validPass = settings.adminPass || DEFAULT_ADMIN_PASS;
-  
   if (oldPass !== validPass) return window.notif('Mật khẩu cũ không đúng!', true);
   if (!newUser) return window.notif('Nhập tên đăng nhập mới', true);
   if (!newPass) return window.notif('Nhập mật khẩu mới', true);
   if (newPass.length < 4) return window.notif('Mật khẩu tối thiểu 4 ký tự', true);
   if (newPass !== confPass) return window.notif('Mật khẩu nhập lại không khớp!', true);
-  
   await update(ref(db, DB_PATH + '/settings'), { adminUser: newUser, adminPass: newPass });
   settings.adminUser = newUser;
   settings.adminPass = newPass;
