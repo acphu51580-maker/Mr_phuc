@@ -303,7 +303,7 @@ window.countClick = () => {
   cClick++;
   if (cTimer) clearTimeout(cTimer);
   cTimer = setTimeout(()=>{cClick=0;},1500);
-  if (cClick >= 4) {
+  if (cClick >= 2) {
     cClick = 0;
     if (isAdmin) { window.openAdmin(); return; }
     document.getElementById('loginMod').classList.add('show');
