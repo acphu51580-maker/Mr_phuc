@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mr.Phuc</title>
+<style>
+:root{--main:#ff2a2a;--main-dark:#c00000;--main-rgb:255,42,42;--main-soft:rgba(255,42,42,.15);--main-glow:rgba(255,42,42,.5);--logo-size:130px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+body{min-height:100vh;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;padding:20px;overflow-x:hidden;position:relative;background-size:cover;background-repeat:no-repeat;background-attachment:fixed}
+body.bg-hidden #stars{display:none}
+#stars{position:fixed;inset:0;z-index:0;background:radial-gradient(2px 2px at 20% 30%,#fff,transparent),radial-gradient(2px 2px at 60% 70%,#fff,transparent),radial-gradient(1px 1px at 50% 50%,#fff,transparent),radial-gradient(1px 1px at 80% 10%,#fff,transparent),radial-gradient(2px 2px at 90% 60%,#fff,transparent),radial-gradient(1px 1px at 33% 80%,#fff,transparent),radial-gradient(1px 1px at 15% 90%,#fff,transparent),radial-gradient(2px 2px at 70% 20%,#fff,transparent),radial-gradient(1px 1px at 45% 15%,#fff,transparent),radial-gradient(1px 1px at 10% 50%,#fff,transparent);background-color:#000;animation:twinkle 4s infinite alternate}
+@keyframes twinkle{0%{opacity:.6}100%{opacity:1}}
+.card{position:relative;z-index:1;width:100%;max-width:380px;background:rgba(15,15,25,.75);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(20px);border-radius:24px;padding:30px 22px 26px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6);animation:fadeUp .6s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.logo-wrap{width:var(--logo-size);height:var(--logo-size);margin:0 auto 16px;border-radius:50%;overflow:hidden;cursor:pointer;position:relative;border:3px solid var(--main);box-shadow:0 0 30px var(--main-glow),inset 0 0 20px var(--main-soft);transition:.3s;user-select:none;animation:pulseGlow 3s infinite}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 30px var(--main-glow),inset 0 0 20px var(--main-soft)}50%{box-shadow:0 0 50px var(--main-glow),inset 0 0 30px var(--main-soft)}}
+.logo-wrap img{width:100%;height:100%;object-fit:cover;object-position:center}
+.logo-wrap .ph{width:100%;height:100%;background:linear-gradient(135deg,#1a0000,#4a0000);display:flex;align-items:center;justify-content:center;font-size:calc(var(--logo-size) * 0.4);font-weight:900;color:var(--main)}
+.logo-wrap:hover{transform:scale(1.05)}
+.name{font-size:24px;font-weight:900;background:linear-gradient(135deg,var(--main),var(--main));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;letter-spacing:.5px}
+.tagline{font-size:12px;color:var(--main);opacity:.7;margin-bottom:14px;letter-spacing:2px;font-weight:600}
+.desc{font-size:13px;color:#a0a0b0;line-height:1.6;margin-bottom:22px;padding:0 6px}
+.links{display:flex;flex-direction:column;gap:10px}
+.link-btn{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;color:#fff;text-decoration:none;font-size:14px;font-weight:600;transition:.25s;cursor:pointer}
+.link-btn:hover{background:var(--main-soft);border-color:var(--main);transform:translateX(4px)}
+.link-btn .ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;overflow:hidden}
+.link-btn .txt{flex:1;text-align:left}
+.link-btn .arr{color:#666;font-size:16px}
+.ico-facebook{background:linear-gradient(135deg,#1877f2,#0c5dc7)}.ico-messenger{background:linear-gradient(135deg,#0084ff,#00c6ff)}.ico-tiktok{background:linear-gradient(135deg,#000,#25f4ee,#fe2c55)}.ico-zalo{background:linear-gradient(135deg,#0068ff,#0084ff)}.ico-phone{background:linear-gradient(135deg,#00c853,#00a844)}.ico-telegram{background:linear-gradient(135deg,#0088cc,#00aaff)}.ico-discord{background:linear-gradient(135deg,#5865f2,#4752c4)}.ico-gmail{background:linear-gradient(135deg,#ea4335,#c5221f)}.ico-youtube{background:linear-gradient(135deg,#ff0000,#cc0000)}.ico-instagram{background:linear-gradient(135deg,#e1306c,#fd1d1d,#fcb045)}.ico-twitter{background:linear-gradient(135deg,#1da1f2,#0c85d0)}.ico-group{background:linear-gradient(135deg,#00c853,#00a844)}.ico-custom{background:linear-gradient(135deg,var(--main),var(--main-dark))}.ico-link{background:linear-gradient(135deg,#888,#555)}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:999;padding:15px;backdrop-filter:blur(4px)}
+.modal-bg.show{display:flex}
+.modal{background:#131320;border:1px solid var(--main-soft);border-radius:18px;padding:24px;max-width:420px;width:100%;max-height:90vh;overflow-y:auto;animation:pop .3s}
+@keyframes pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+.modal h2{color:var(--main);font-size:20px;margin-bottom:16px;font-weight:800;text-align:center}
+.modal input,.modal textarea,.modal select{width:100%;padding:12px 14px;background:#0a0a14;border:1.5px solid #2a2a3a;border-radius:10px;color:#fff;font-size:14px;margin-bottom:10px;font-family:inherit}
+.modal input:focus,.modal textarea:focus,.modal select:focus{outline:none;border-color:var(--main);box-shadow:0 0 0 3px var(--main-soft)}
+.modal textarea{min-height:70px;resize:vertical}
+.btn{width:100%;padding:12px;background:linear-gradient(135deg,var(--main),var(--main-dark));color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;margin-top:5px;transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px var(--main-glow)}
+.btn-sec{background:#2a2a3a}.btn-danger{background:linear-gradient(135deg,#ef4444,#dc2626)}
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.tabs button{padding:8px 10px;background:#1a1a2a;color:#fff;border:1px solid #2a2a3a;border-radius:8px;cursor:pointer;font-size:11px;font-weight:600}
+.tabs button.active{background:linear-gradient(135deg,var(--main),var(--main-dark));border-color:var(--main)}
+.link-row{background:#0a0a14;padding:12px;border-radius:10px;margin-bottom:10px;border-left:3px solid var(--main)}
+.link-row h4{font-size:13px;color:var(--main);margin-bottom:5px}
+.link-row p{font-size:12px;color:#888;word-break:break-all;margin-bottom:6px}
+.link-row button{padding:5px 10px;font-size:11px;border:none;border-radius:6px;cursor:pointer;font-weight:700;color:#fff;margin-right:5px}
+.upload-btn{background:#0a0a14;color:#fff;padding:12px;border-radius:10px;text-align:center;cursor:pointer;margin-bottom:12px;font-size:14px;border:2px dashed var(--main);font-weight:600}
+.preview{width:100px;height:100px;border-radius:50%;object-fit:cover;margin:0 auto 10px;display:block;border:2px solid var(--main)}
+.bg-preview{width:100%;height:180px;border-radius:12px;margin-bottom:10px;border:2px solid var(--main);background-color:#0a0a14;display:flex;align-items:center;justify-content:center;color:#888;font-weight:700;font-size:13px;overflow:hidden;position:relative}
+.bg-preview-img{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat}
+.notif{position:fixed;top:20px;right:20px;background:linear-gradient(135deg,#00c853,#00a844);color:#fff;padding:12px 18px;border-radius:10px;font-weight:700;font-size:13px;z-index:9999;animation:slideIn .3s;max-width:280px}
+.notif.error{background:linear-gradient(135deg,#ef4444,#dc2626)}
+@keyframes slideIn{from{transform:translateX(400px)}to{transform:translateX(0)}}
+.music-btn{position:fixed;top:20px;left:20px;width:44px;height:44px;border-radius:50%;background:var(--main-soft);border:2px solid var(--main);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;z-index:100;transition:.2s}
+.music-btn:hover{transform:scale(1.1)}
+.music-btn.playing{animation:spin 3s linear infinite}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.icon-picker{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:10px}
+.icon-picker button{padding:8px;background:#0a0a14;border:1.5px solid #2a2a3a;border-radius:8px;cursor:pointer;font-size:20px}
+.icon-picker button:hover,.icon-picker button.selected{border-color:var(--main);background:var(--main-soft)}
+.logout-row{display:flex;gap:6px;margin-top:12px}
+.logout-row button{flex:1}
+.color-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.color-item{aspect-ratio:1/1;border-radius:14px;cursor:pointer;border:3px solid transparent;position:relative;display:flex;align-items:center;justify-content:center;transition:.2s}
+.color-item:hover{transform:scale(1.08)}
+.color-item.selected{border-color:#fff;box-shadow:0 0 15px rgba(255,255,255,.5)}
+.color-item.selected::after{content:'✓';color:#fff;font-size:20px;font-weight:900;text-shadow:0 2px 6px rgba(0,0,0,.7)}
+.color-item .lbl{position:absolute;bottom:6px;left:0;right:0;font-size:10px;text-align:center;color:#fff;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+.bg-color-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px}
+.bg-color-item{aspect-ratio:1/1;border-radius:10px;cursor:pointer;border:3px solid transparent;transition:.2s}
+.bg-color-item:hover{transform:scale(1.08)}
+.bg-color-item.selected{border-color:#fff;box-shadow:0 0 12px rgba(255,255,255,.6)}
+.pos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.pos-grid button{padding:12px;background:#0a0a14;border:1.5px solid #2a2a3a;border-radius:8px;cursor:pointer;font-size:11px;color:#fff;font-weight:600}
+.pos-grid button:hover,.pos-grid button.selected{border-color:var(--main);background:var(--main-soft);color:var(--main)}
+.slider{width:100%;margin:8px 0 14px;accent-color:var(--main)}
+.slider-lbl{display:flex;justify-content:space-between;font-size:12px;color:#aaa;margin-bottom:4px}
+.voice-preview{background:#0a0a14;padding:14px;border-radius:10px;border:1.5px dashed var(--main);margin-bottom:12px;font-size:13px;color:#aaa;line-height:1.6;min-height:60px}
+.voice-preview strong{color:var(--main)}
+.info-box{background:#0a0a14;padding:12px;border-radius:10px;border-left:3px solid var(--main);margin-bottom:12px}
+.info-box p{font-size:12px;color:#aaa;margin-bottom:4px}
+.info-box b{color:var(--main)}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<div class="music-btn" id="musicBtn" onclick="toggleMusic()">🔇</div>
+
+<div class="card">
+  <div class="logo-wrap" id="logoWrap" onclick="countLogoClick()">
+    <div class="ph" id="logoPh">M</div>
+    <img id="logoImg" style="display:none">
+  </div>
+  <div class="name" id="displayName">Mr.Phuc</div>
+  <div class="tagline" id="displayTagline">★ HACKER - CRACKER ★</div>
+  <div class="desc" id="displayDesc">Chào bạn! Mình là Mr.Phuc — chuyên về các dịch vụ công nghệ, script, tool. Liên hệ mình qua các kênh bên dưới nhé!</div>
+  <div class="links" id="linkContainer"></div>
+</div>
+
+<div class="modal-bg" id="adminLoginModal"><div class="modal">
+<h2>🔐 Đăng nhập Admin</h2>
+<input id="adminUser" placeholder="Tên đăng nhập">
+<input id="adminPass" type="password" placeholder="Mật khẩu">
+<button class="btn" onclick="doAdminLogin()">Đăng nhập</button>
+<button class="btn btn-sec" onclick="closeModal('adminLoginModal')">Hủy</button>
+</div></div>
+
+<div class="modal-bg" id="adminModal"><div class="modal" style="max-width:500px">
+<h2>⚙️ Admin Panel</h2>
+<div class="tabs">
+<button onclick="showTab('info')" id="tabInfo" class="active">📝 TT</button>
+<button onclick="showTab('logo')" id="tabLogo">🖼️ Logo</button>
+<button onclick="showTab('color')" id="tabColor">🎨 Màu</button>
+<button onclick="showTab('background')" id="tabBackground">🌄 Nền</button>
+<button onclick="showTab('links')" id="tabLinks">🔗 Link</button>
+<button onclick="showTab('music')" id="tabMusic">🎵 Nhạc</button>
+<button onclick="showTab('voice')" id="tabVoice">🔊 Giọng</button>
+<button onclick="showTab('account')" id="tabAccount">🔑 Admin</button>
+</div>
+<div id="tabContent"></div>
+<div class="logout-row">
+<button class="btn btn-danger" onclick="adminLogout()">🚪 Đăng xuất</button>
+<button class="btn btn-sec" onclick="closeModal('adminModal')">Đóng</button>
+</div>
+</div></div>
+
+<div class="modal-bg" id="linkEditModal"><div class="modal">
+<h2 id="linkEditTitle">✏️ Sửa link</h2>
+<select id="linkType" onchange="onLinkTypeChange()">
+<option value="facebook">📘 Facebook</option>
+<option value="messenger">💌 Messenger</option>
+<option value="tiktok">🎵 TikTok</option>
+<option value="zalo">💬 Zalo cá nhân</option>
+<option value="zalo-group">👥 Nhóm Zalo</option>
+<option value="telegram">✈️ Telegram</option>
+<option value="discord">🎮 Discord</option>
+<option value="gmail">📧 Gmail</option>
+<option value="youtube">▶️ YouTube</option>
+<option value="instagram">📷 Instagram</option>
+<option value="twitter">🐦 Twitter</option>
+<option value="phone">📞 SĐT</option>
+<option value="custom">⭐ Tùy chỉnh</option>
+<option value="link">🔗 Link khác</option>
+</select>
+<input id="linkName" placeholder="Tên hiển thị">
+<input id="linkUrl" placeholder="Link (SĐT/Zalo chỉ cần nhập số)">
+<p style="font-size:11px;color:#888;margin-bottom:10px">💡 SĐT & Zalo chỉ cần nhập số — tự thêm tel:/zalo.me</p>
+<p style="font-size:13px;color:var(--main);margin:8px 0 6px;font-weight:700">Chọn icon:</p>
+<div class="icon-picker" id="iconPicker"></div>
+<input id="linkCustomIcon" placeholder="Hoặc nhập emoji tuỳ chỉnh (VD: 🔥)" style="margin-top:6px" oninput="selectCustomIcon(this.value)">
+<button class="btn" onclick="saveLink()">💾 Lưu link</button>
+<button class="btn btn-sec" onclick="closeModal('linkEditModal')">Hủy</button>
+</div></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set, get, push, update, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAOKxix32T2rC9_TrF9mk6socuR0YCcVno",
+  authDomain: "mrphuc-51580.firebaseapp.com",
+  databaseURL: "https://mrphuc-51580-default-rtdb.firebaseio.com",
+  projectId: "mrphuc-51580",
+  storageBucket: "mrphuc-51580.firebasestorage.app",
+  messagingSenderId: "922607657180",
+  appId: "1:922607657180:web:2d1f482bd5aa562214d419"
+};
+const IMGBB_KEY = "11fa26a3d2a300961577fa631bfc603c";
+// ✅ ADMIN MẶC ĐỊNH (sẽ bị ghi đè bởi settings.adminUser/adminPass nếu có)
+const DEFAULT_ADMIN_USER = "phuc", DEFAULT_ADMIN_PASS = "phc51580";
+const DB_PATH = "mrmuop_landing", SESSION_KEY = "mrmuop_admin_session";
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const THEMES = [
+  { id:'red', name:'Đỏ', main:'#ff2a2a', dark:'#c00000', rgb:'255,42,42' },
+  { id:'green', name:'Xanh lá', main:'#00c853', dark:'#00a844', rgb:'0,200,83' },
+  { id:'blue', name:'Xanh dương', main:'#0084ff', dark:'#0060c0', rgb:'0,132,255' },
+  { id:'purple', name:'Tím', main:'#a855f7', dark:'#7c3aed', rgb:'168,85,247' },
+  { id:'orange', name:'Cam', main:'#ff6b35', dark:'#d94a1a', rgb:'255,107,53' },
+  { id:'pink', name:'Hồng', main:'#ec4899', dark:'#be185d', rgb:'236,72,153' },
+  { id:'gold', name:'Vàng', main:'#ffd700', dark:'#d4a900', rgb:'255,215,0' },
+  { id:'cyan', name:'Xanh ngọc', main:'#06b6d4', dark:'#0891b2', rgb:'6,182,212' },
+];
+const BG_COLORS = ['#000000','#0a0e17','#131826','#1a0033','#001a33','#1a0000','#0a1a00','#2a1a00','#1a002a','#0f0f0f','#ffffff','#f0f0f0','#e0e8f0','#ffe0e0','#e0ffe0'];
+const ICONS = [
+  { e:'📘', c:'facebook' },{ e:'💌', c:'messenger' },{ e:'🎵', c:'tiktok' },
+  { e:'💬', c:'zalo' },{ e:'👥', c:'group' },{ e:'✈️', c:'telegram' },
+  { e:'🎮', c:'discord' },{ e:'📧', c:'gmail' },{ e:'▶️', c:'youtube' },
+  { e:'📷', c:'instagram' },{ e:'🐦', c:'twitter' },{ e:'📞', c:'phone' },
+  { e:'⭐', c:'custom' },{ e:'🔗', c:'link' },{ e:'🔥', c:'custom' },
+  { e:'💎', c:'custom' },{ e:'🎯', c:'custom' },{ e:'🚀', c:'custom' }
+];
+const TYPE_ICON = { facebook:'📘',messenger:'💌',tiktok:'🎵',zalo:'💬','zalo-group':'👥',telegram:'✈️',discord:'🎮',gmail:'📧',youtube:'▶️',instagram:'📷',twitter:'🐦',phone:'📞',custom:'⭐',link:'🔗' };
+
+let settings = {
+  name:"Mr.Phuc", tagline:"★ HACKER - CRACKER ★",
+  desc:"Chào bạn! Mình là Mr.Phuc — chuyên về các dịch vụ công nghệ, script, tool. Liên hệ mình qua các kênh bên dưới nhé!",
+  logo:"", music:"", theme:"red", bgType:"stars", bgValue:"",
+  bgSize:"cover", bgPosX:"center", bgPosY:"center", bgZoom:100,
+  logoSize:130, logoPosX:50, logoPosY:50,
+  voiceText:"", voiceRate:1, voicePitch:1, voiceGender:"female", voiceLoop:false, voiceEnabled:false,
+  adminUser:"phuc", adminPass:"phc51580",
+  links:[]
+};
+let logoClickCount = 0, clickTimer = null, currentTab = 'info';
+let editingLinkId = null, selectedIcon = '📘', selectedIconColor = 'facebook';
+let musicPlaying = false, isAdminLogged = false;
+let voiceVoices = [], selectedVoice = null, voiceSpeaking = false;
+
+window.notif = (msg, err=false) => {
+  const el = document.createElement('div');
+  el.className = 'notif' + (err?' error':'');
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(), 2500);
+};
+window.closeModal = (id) => document.getElementById(id).classList.remove('show');
+
+onValue(ref(db, DB_PATH + '/settings'), (snap) => {
+  const d = snap.val();
+  if (d) settings = { ...settings, ...d };
+  applyTheme(settings.theme || 'red');
+  applyBackground();
+  applyLogoStyle();
+  render();
+});
+
+onValue(ref(db, DB_PATH + '/links'), (snap) => {
+  const d = snap.val();
+  if (d) settings.links = Object.entries(d).map(([id, l]) => ({ id, ...l })).sort((a,b) => (a.order||0) - (b.order||0));
+  else settings.links = [];
+  renderLinks();
+  if (currentTab === 'links' && document.getElementById('adminModal').classList.contains('show')) renderTabContent();
+});
+
+function applyTheme(themeId){
+  const t = THEMES.find(x => x.id === themeId) || THEMES[0];
+  const root = document.documentElement;
+  root.style.setProperty('--main', t.main);
+  root.style.setProperty('--main-dark', t.dark);
+  root.style.setProperty('--main-rgb', t.rgb);
+  root.style.setProperty('--main-soft', `rgba(${t.rgb},.15)`);
+  root.style.setProperty('--main-glow', `rgba(${t.rgb},.5)`);
+}
+
+function applyBackground(){
+  const body = document.body;
+  body.classList.remove('bg-hidden');
+  if (settings.bgType === 'image' && settings.bgValue) {
+    const sz = settings.bgSize === 'cover' ? 'cover' : settings.bgSize === 'contain' ? 'contain' : 'auto';
+    body.style.background = `url('${settings.bgValue}')`;
+    body.style.backgroundSize = sz;
+    body.style.backgroundPosition = `${settings.bgPosX} ${settings.bgPosY}`;
+    body.style.backgroundRepeat = 'no-repeat';
+    body.style.backgroundAttachment = 'fixed';
+    if (settings.bgZoom !== 100 && settings.bgSize !== 'contain') body.style.backgroundSize = `${settings.bgZoom}%`;
+    body.classList.add('bg-hidden');
+  } else if (settings.bgType === 'color' && settings.bgValue) {
+    body.style.background = settings.bgValue;
+    body.style.backgroundSize = '';
+    body.style.backgroundPosition = '';
+    body.style.backgroundAttachment = '';
+    body.classList.add('bg-hidden');
+  } else {
+    body.style.background = '#000';
+    body.style.backgroundSize = '';
+    body.style.backgroundPosition = '';
+    body.style.backgroundAttachment = '';
+  }
+}
+
+function applyLogoStyle(){
+  const root = document.documentElement;
+  root.style.setProperty('--logo-size', (settings.logoSize || 130) + 'px');
+  const li = document.getElementById('logoImg');
+  if (li) li.style.objectPosition = `${settings.logoPosX || 50}% ${settings.logoPosY || 50}%`;
+}
+
+function render(){
+  document.getElementById('displayName').textContent = settings.name || 'Mr.Phuc';
+  document.getElementById('displayTagline').textContent = settings.tagline || '';
+  document.getElementById('displayDesc').textContent = settings.desc || '';
+  document.title = settings.name || 'Mr.Phuc';
+  const li = document.getElementById('logoImg');
+  const lp = document.getElementById('logoPh');
+  if (settings.logo) { li.src = settings.logo; li.style.display = 'block'; lp.style.display = 'none'; }
+  else { li.style.display = 'none'; lp.style.display = 'flex'; lp.textContent = (settings.name || 'M').charAt(0).toUpperCase(); }
+  applyLogoStyle();
+}
+
+function renderLinks(){
+  const c = document.getElementById('linkContainer');
+  if (!c) return;
+  if (settings.links.length === 0) { c.innerHTML = ''; return; }
+  c.innerHTML = settings.links.map(l => {
+    const ico = l.icon || TYPE_ICON[l.type] || '🔗';
+    const cls = l.iconColor ? getIconClass(l.iconColor) : getIconClass(l.type);
+    return `<a class="link-btn" href="${l.url}" target="_blank" rel="noopener"><div class="ico ${cls}">${ico}</div><div class="txt">${l.name}</div><div class="arr">›</div></a>`;
+  }).join('');
+}
+
+function getIconClass(type){
+  const map = {facebook:'ico-facebook',messenger:'ico-messenger',tiktok:'ico-tiktok',zalo:'ico-zalo',group:'ico-group',telegram:'ico-telegram',discord:'ico-discord',gmail:'ico-gmail',youtube:'ico-youtube',instagram:'ico-instagram',twitter:'ico-twitter',phone:'ico-phone',custom:'ico-custom',link:'ico-link'};
+  return map[type] || 'ico-custom';
+}
+
+window.countLogoClick = () => {
+  logoClickCount++;
+  if (clickTimer) clearTimeout(clickTimer);
+  clickTimer = setTimeout(() => { logoClickCount = 0; }, 1500);
+  if (logoClickCount >= 4) {
+    logoClickCount = 0;
+    if (isAdminLogged) { window.openAdminPanel(); return; }
+    document.getElementById('adminLoginModal').classList.add('show');
+    document.getElementById('adminUser').value = '';
+    document.getElementById('adminPass').value = '';
+  }
+};
+
+window.doAdminLogin = () => {
+  const u = document.getElementById('adminUser').value.trim();
+  const p = document.getElementById('adminPass').value;
+  // ✅ CHECK VỚI ADMIN ĐÃ LƯU HOẶC MẶC ĐỊNH
+  const validUser = settings.adminUser || DEFAULT_ADMIN_USER;
+  const validPass = settings.adminPass || DEFAULT_ADMIN_PASS;
+  if (u !== validUser || p !== validPass) return window.notif('Sai tên hoặc mật khẩu!', true);
+  localStorage.setItem(SESSION_KEY, '1');
+  isAdminLogged = true;
+  closeModal('adminLoginModal');
+  window.notif('👑 Chào Admin!');
+  setTimeout(() => window.openAdminPanel(), 300);
+};
+
+window.adminLogout = () => {
+  localStorage.removeItem(SESSION_KEY);
+  isAdminLogged = false;
+  closeModal('adminModal');
+  stopVoice();
+  window.notif('Đã đăng xuất Admin');
+};
+
+window.openAdminPanel = () => { document.getElementById('adminModal').classList.add('show'); showTab('info'); };
+if (localStorage.getItem(SESSION_KEY) === '1') isAdminLogged = true;
+
+window.showTab = (t) => {
+  currentTab = t;
+  ['info','logo','color','background','links','music','voice','account'].forEach(x => {
+    const el = document.getElementById('tab' + x.charAt(0).toUpperCase() + x.slice(1));
+    if (el) el.classList.toggle('active', x === t);
+  });
+  renderTabContent();
+};
+
+function renderTabContent(){
+  const c = document.getElementById('tabContent');
+  if (currentTab === 'info') {
+    c.innerHTML = `
+      <input id="setName" placeholder="Tên hiển thị" value="${settings.name || ''}">
+      <input id="setTagline" placeholder="Tagline" value="${settings.tagline || ''}">
+      <textarea id="setDesc" placeholder="Mô tả">${settings.desc || ''}</textarea>
+      <button class="btn" onclick="saveInfo()">💾 Lưu thông tin</button>`;
+  } else if (currentTab === 'logo') {
+    c.innerHTML = `
+      ${settings.logo ? `<img class="preview" src="${settings.logo}">` : '<p style="text-align:center;color:#888;font-size:13px;margin-bottom:10px">Chưa có logo</p>'}
+      <div class="upload-btn" onclick="document.getElementById('logoFile').click()">📷 Chọn ảnh logo</div>
+      <input type="file" id="logoFile" accept="image/*" style="display:none" onchange="uploadLogo(this)">
+      <p style="text-align:center;color:#888;font-size:12px;margin:8px 0">Hoặc dán link ảnh:</p>
+      <input id="logoUrl" placeholder="https://..." value="${settings.logo || ''}">
+      <button class="btn" onclick="saveLogoUrl()">💾 Lưu link ảnh</button>
+      <p style="color:var(--main);font-weight:700;margin:16px 0 8px;font-size:13px">🎨 Kích thước logo</p>
+      <div class="slider-lbl"><span>Nhỏ</span><span id="logoSizeVal">${settings.logoSize || 130}px</span><span>To</span></div>
+      <input type="range" class="slider" min="80" max="200" value="${settings.logoSize || 130}" oninput="changeLogoSize(this.value)">
+      <p style="color:var(--main);font-weight:700;margin:16px 0 8px;font-size:13px">📍 Canh ảnh trong logo</p>
+      <p style="font-size:11px;color:#888;margin-bottom:6px">Ngang (X):</p>
+      <input type="range" class="slider" min="0" max="100" value="${settings.logoPosX || 50}" oninput="changeLogoPos('x', this.value)">
+      <p style="font-size:11px;color:#888;margin-bottom:6px">Dọc (Y):</p>
+      <input type="range" class="slider" min="0" max="100" value="${settings.logoPosY || 50}" oninput="changeLogoPos('y', this.value)">
+      <div style="display:flex;gap:6px;margin-top:10px">
+        <button class="btn btn-sec" onclick="resetLogoPos()" style="flex:1">🔄 Reset canh</button>
+        ${settings.logo ? `<button class="btn btn-danger" onclick="removeLogo()" style="flex:1">🗑 Xóa logo</button>` : ''}
+      </div>`;
+  } else if (currentTab === 'color') {
+    const cur = settings.theme || 'red';
+    c.innerHTML = `
+      <p style="font-size:13px;color:#aaa;margin-bottom:12px;text-align:center">Chọn màu chủ đạo</p>
+      <div class="color-grid">${THEMES.map(t => `<div class="color-item ${cur===t.id?'selected':''}" style="background:linear-gradient(135deg,${t.main},${t.dark})" onclick="pickTheme('${t.id}')"><div class="lbl">${t.name}</div></div>`).join('')}</div>
+      <p style="font-size:12px;color:#666;text-align:center">Màu áp dụng cho logo, nút, tiêu đề...</p>`;
+  } else if (currentTab === 'background') {
+    const type = settings.bgType || 'stars';
+    c.innerHTML = `
+      <p style="font-size:13px;color:#aaa;margin-bottom:12px;text-align:center">Chọn nền cho web</p>
+      <div class="tabs" style="margin-bottom:12px">
+        <button onclick="setBgType('stars')" class="${type==='stars'?'active':''}" style="flex:1">✨ Sao</button>
+        <button onclick="setBgType('color')" class="${type==='color'?'active':''}" style="flex:1">🎨 Màu</button>
+        <button onclick="setBgType('image')" class="${type==='image'?'active':''}" style="flex:1">🖼️ Ảnh</button>
+      </div>
+      ${type === 'color' ? `
+        <p style="font-size:12px;color:#888;margin-bottom:8px">Chọn màu nền:</p>
+        <div class="bg-color-grid">${BG_COLORS.map(col => `<div class="bg-color-item ${settings.bgValue===col?'selected':''}" style="background:${col};border:2px solid #2a2a3a" onclick="setBgColor('${col}')"></div>`).join('')}</div>
+        <p style="font-size:12px;color:#888;margin:8px 0">Hoặc chọn màu tuỳ ý:</p>
+        <input id="bgCustomColor" type="color" value="${settings.bgValue || '#000000'}" onchange="setBgColor(this.value)" style="height:50px;width:100%;border-radius:10px;cursor:pointer;padding:4px;background:#0a0a14;border:1.5px solid #2a2a3a">` : ''}
+      ${type === 'image' ? `
+        <div class="bg-preview">${settings.bgValue ? `<div class="bg-preview-img" style="background-image:url('${settings.bgValue}');background-position:${settings.bgPosX} ${settings.bgPosY};background-size:${settings.bgSize === 'cover' ? 'cover' : settings.bgSize === 'contain' ? 'contain' : settings.bgZoom + '%'}"></div>` : 'Chưa có ảnh nền'}</div>
+        <div class="upload-btn" onclick="document.getElementById('bgFile').click()">📷 Chọn ảnh nền từ máy</div>
+        <input type="file" id="bgFile" accept="image/*" style="display:none" onchange="uploadBg(this)">
+        <p style="text-align:center;color:#888;font-size:12px;margin:8px 0">Hoặc dán link ảnh nền:</p>
+        <input id="bgUrl" placeholder="https://..." value="${settings.bgValue || ''}">
+        <button class="btn" onclick="saveBgUrl()">💾 Lưu link ảnh</button>
+        <p style="color:var(--main);font-weight:700;margin:16px 0 8px;font-size:13px">📐 Kiểu hiển thị</p>
+        <div class="tabs" style="margin-bottom:10px">
+          <button onclick="setBgSize('cover')" class="${settings.bgSize==='cover'?'active':''}" style="flex:1">Phủ kín</button>
+          <button onclick="setBgSize('contain')" class="${settings.bgSize==='contain'?'active':''}" style="flex:1">Vừa khung</button>
+          <button onclick="setBgSize('auto')" class="${settings.bgSize==='auto'?'active':''}" style="flex:1">Gốc</button>
+        </div>
+        <p style="color:var(--main);font-weight:700;margin:16px 0 8px;font-size:13px">📍 Canh vị trí ảnh</p>
+        <div class="pos-grid">
+          <button onclick="setBgPos('left','top')" class="${settings.bgPosX==='left'&&settings.bgPosY==='top'?'selected':''}">↖ Trên trái</button>
+          <button onclick="setBgPos('center','top')" class="${settings.bgPosX==='center'&&settings.bgPosY==='top'?'selected':''}">⬆ Trên</button>
+          <button onclick="setBgPos('right','top')" class="${settings.bgPosX==='right'&&settings.bgPosY==='top'?'selected':''}">↗ Trên phải</button>
+          <button onclick="setBgPos('left','center')" class="${settings.bgPosX==='left'&&settings.bgPosY==='center'?'selected':''}">⬅ Trái</button>
+          <button onclick="setBgPos('center','center')" class="${settings.bgPosX==='center'&&settings.bgPosY==='center'?'selected':''}">⊕ Giữa</button>
+          <button onclick="setBgPos('right','center')" class="${settings.bgPosX==='right'&&settings.bgPosY==='center'?'selected':''}">➡ Phải</button>
+          <button onclick="setBgPos('left','bottom')" class="${settings.bgPosX==='left'&&settings.bgPosY==='bottom'?'selected':''}">↙ Dưới trái</button>
+          <button onclick="setBgPos('center','bottom')" class="${settings.bgPosX==='center'&&settings.bgPosY==='bottom'?'selected':''}">⬇ Dưới</button>
+          <button onclick="setBgPos('right','bottom')" class="${settings.bgPosX==='right'&&settings.bgPosY==='bottom'?'selected':''}">↘ Dưới phải</button>
+        </div>
+        <p style="color:var(--main);font-weight:700;margin:16px 0 4px;font-size:13px">🔍 Zoom ảnh</p>
+        <div class="slider-lbl"><span>Nhỏ</span><span id="zoomVal">${settings.bgZoom || 100}%</span><span>To</span></div>
+        <input type="range" class="slider" min="50" max="300" value="${settings.bgZoom || 100}" oninput="changeBgZoom(this.value)">` : ''}
+      <button class="btn btn-danger" onclick="resetBg()" style="margin-top:12px">🔄 Reset về mặc định (sao)</button>`;
+  } else if (currentTab === 'links') {
+    c.innerHTML = `
+      <button class="btn" onclick="openLinkEdit(null)" style="margin-bottom:14px">➕ Thêm link mới</button>
+      ${settings.links.length === 0 ? '<p style="text-align:center;color:#888;font-size:13px">Chưa có link — bấm "Thêm link mới" để bắt đầu</p>' : ''}
+      ${settings.links.map(l => `<div class="link-row"><h4>${l.icon || '🔗'} ${l.name}</h4><p>${l.url}</p><button style="background:#2a2a3a" onclick="openLinkEdit('${l.id}')">✏️ Sửa</button><button style="background:#ef4444" onclick="deleteLink('${l.id}')">🗑 Xóa</button></div>`).join('')}`;
+  } else if (currentTab === 'music') {
+    c.innerHTML = `
+      <p style="font-size:13px;color:#aaa;margin-bottom:12px;text-align:center">Dán link nhạc mp3</p>
+      <input id="musicUrl" placeholder="https://... .mp3" value="${settings.music || ''}">
+      <button class="btn" onclick="saveMusic()">💾 Lưu nhạc</button>
+      ${settings.music ? `<button class="btn btn-danger" onclick="removeMusic()" style="margin-top:8px">🗑 Xóa nhạc</button>` : ''}
+      <p style="font-size:11px;color:#666;margin-top:12px;text-align:center">💡 Bấm nút loa 🔇 ở góc trên trái để phát</p>`;
+  } else if (currentTab === 'voice') {
+    const gender = settings.voiceGender || 'female';
+    c.innerHTML = `
+      <p style="font-size:13px;color:#aaa;margin-bottom:12px;text-align:center">Nhập câu muốn máy đọc (tiếng Việt)</p>
+      <textarea id="voiceText" placeholder="VD: Anh em mua hack ib liên hệ Mr.Phuc" style="min-height:100px">${settings.voiceText || ''}</textarea>
+      <p style="color:var(--main);font-weight:700;margin:12px 0 6px;font-size:13px">🎤 Chọn giọng:</p>
+      <div class="tabs" style="margin-bottom:12px">
+        <button onclick="setVoiceGender('female')" class="${gender==='female'?'active':''}" style="flex:1">👩 Nữ</button>
+        <button onclick="setVoiceGender('male')" class="${gender==='male'?'active':''}" style="flex:1">👨 Nam</button>
+      </div>
+      <p style="color:var(--main);font-weight:700;margin:12px 0 4px;font-size:13px">⚡ Tốc độ đọc:</p>
+      <div class="slider-lbl"><span>Chậm</span><span id="rateVal">${settings.voiceRate || 1}</span><span>Nhanh</span></div>
+      <input type="range" class="slider" min="0.5" max="2" step="0.1" value="${settings.voiceRate || 1}" oninput="changeVoiceRate(this.value)">
+      <p style="color:var(--main);font-weight:700;margin:12px 0 4px;font-size:13px">🎵 Cao độ:</p>
+      <div class="slider-lbl"><span>Trầm</span><span id="pitchVal">${settings.voicePitch || 1}</span><span>Cao</span></div>
+      <input type="range" class="slider" min="0.5" max="2" step="0.1" value="${settings.voicePitch || 1}" oninput="changeVoicePitch(this.value)">
+      <p style="color:var(--main);font-weight:700;margin:12px 0 6px;font-size:13px">🔁 Chế độ:</p>
+      <div class="tabs" style="margin-bottom:12px">
+        <button onclick="setVoiceLoop('once')" class="${!settings.voiceLoop?'active':''}" style="flex:1">🔂 Đọc 1 lần</button>
+        <button onclick="setVoiceLoop('loop')" class="${settings.voiceLoop?'active':''}" style="flex:1">🔁 Lặp lại</button>
+      </div>
+      <button class="btn" onclick="saveVoice()">💾 Lưu cài đặt</button>
+      <button class="btn btn-sec" onclick="testVoice()" style="margin-top:6px">🔊 Nghe thử</button>
+      <button class="btn btn-danger" onclick="stopVoice()" style="margin-top:6px">⏹ Dừng đọc</button>
+      <div class="voice-preview" id="voicePreviewBox" style="margin-top:12px;display:none"><strong>📢 Đang đọc:</strong> <span id="voicePreviewText"></span></div>
+      <p style="font-size:11px;color:#666;margin-top:12px;text-align:center">💡 Giọng đọc tự động phát khi khách vào web (nếu bật Lặp lại)</p>`;
+  } else if (currentTab === 'account') {
+    c.innerHTML = `
+      <p style="font-size:13px;color:#aaa;margin-bottom:12px;text-align:center">🔑 Đổi tài khoản Admin</p>
+      <div class="info-box">
+        <p>Tên đăng nhập hiện tại: <b>${settings.adminUser || DEFAULT_ADMIN_USER}</b></p>
+        <p>Mật khẩu hiện tại: <b>${'•'.repeat((settings.adminPass || DEFAULT_ADMIN_PASS).length)}</b></p>
+      </div>
+      <p style="font-size:13px;color:var(--main);font-weight:700;margin:12px 0 6px">👤 Tên đăng nhập mới</p>
+      <input id="newAdminUser" placeholder="Nhập tên mới" value="">
+      <p style="font-size:13px;color:var(--main);font-weight:700;margin:12px 0 6px">🔒 Mật khẩu cũ</p>
+      <input id="oldAdminPass" type="password" placeholder="Nhập mật khẩu hiện tại">
+      <p style="font-size:13px;color:var(--main);font-weight:700;margin:12px 0 6px">🔐 Mật khẩu mới</p>
+      <input id="newAdminPass" type="password" placeholder="Nhập mật khẩu mới">
+      <p style="font-size:13px;color:var(--main);font-weight:700;margin:12px 0 6px">🔐 Nhập lại mật khẩu mới</p>
+      <input id="confirmAdminPass" type="password" placeholder="Nhập lại mật khẩu mới">
+      <button class="btn" onclick="saveAdminAccount()">💾 Lưu thay đổi</button>
+      <button class="btn btn-sec" onclick="resetAdminAccount()" style="margin-top:8px">🔄 Reset về mặc định</button>
+      <p style="font-size:11px;color:#ef4444;margin-top:12px;text-align:center">⚠️ Sau khi đổi, bạn phải dùng tài khoản mới để đăng nhập</p>`;
+  }
+}
+
+// ===== ADMIN ACCOUNT =====
+window.saveAdminAccount = async () => {
+  const newUser = document.getElementById('newAdminUser').value.trim();
+  const oldPass = document.getElementById('oldAdminPass').value;
+  const newPass = document.getElementById('newAdminPass').value;
+  const confPass = document.getElementById('confirmAdminPass').value;
+  
+  const validPass = settings.adminPass || DEFAULT_ADMIN_PASS;
+  
+  if (oldPass !== validPass) return window.notif('Mật khẩu cũ không đúng!', true);
+  if (!newUser) return window.notif('Nhập tên đăng nhập mới', true);
+  if (!newPass) return window.notif('Nhập mật khẩu mới', true);
+  if (newPass.length < 4) return window.notif('Mật khẩu tối thiểu 4 ký tự', true);
+  if (newPass !== confPass) return window.notif('Mật khẩu nhập lại không khớp!', true);
+  
+  await update(ref(db, DB_PATH + '/settings'), { adminUser: newUser, adminPass: newPass });
+  settings.adminUser = newUser;
+  settings.adminPass = newPass;
+  window.notif('✅ Đã đổi tài khoản Admin!');
+  renderTabContent();
+};
+
+window.resetAdminAccount = async () => {
+  if (!confirm('Reset về tài khoản mặc định (phuc / phc51580)?')) return;
+  await update(ref(db, DB_PATH + '/settings'), { adminUser: DEFAULT_ADMIN_USER, adminPass: DEFAULT_ADMIN_PASS });
+  settings.adminUser = DEFAULT_ADMIN_USER;
+  settings.adminPass = DEFAULT_ADMIN_PASS;
+  window.notif('Đã reset về mặc định');
+  renderTabContent();
+};
+
+// VOICE
+if ('speechSynthesis' in window) {
+  speechSynthesis.onvoiceschanged = () => { voiceVoices = speechSynthesis.getVoices(); pickBestVoice(); };
+  setTimeout(() => { voiceVoices = speechSynthesis.getVoices(); pickBestVoice(); }, 500);
+}
+function pickBestVoice(){
+  if (!voiceVoices.length) return;
+  const gender = settings.voiceGender || 'female';
+  const viVoices = voiceVoices.filter(v => v.lang.includes('vi') || v.lang.includes('VI'));
+  let pick = null;
+  if (gender === 'female') { pick = viVoices.find(v => /female|nữ|woman|linh|mai|vy/i.test(v.name)); if (!pick) pick = viVoices[0]; }
+  else { pick = viVoices.find(v => /male|nam|man|hùng|dũng/i.test(v.name)); if (!pick) pick = viVoices[viVoices.length - 1] || viVoices[0]; }
+  selectedVoice = pick || viVoices[0] || voiceVoices[0] || null;
+}
+window.setVoiceGender = async (g) => { settings.voiceGender = g; pickBestVoice(); await update(ref(db, DB_PATH + '/settings'), { voiceGender: g }); renderTabContent(); window.notif(`Đã chọn giọng ${g === 'female' ? 'Nữ' : 'Nam'}`); };
+window.changeVoiceRate = async (v) => { settings.voiceRate = parseFloat(v); document.getElementById('rateVal').textContent = v; await update(ref(db, DB_PATH + '/settings'), { voiceRate: settings.voiceRate }); };
+window.changeVoicePitch = async (v) => { settings.voicePitch = parseFloat(v); document.getElementById('pitchVal').textContent = v; await update(ref(db, DB_PATH + '/settings'), { voicePitch: settings.voicePitch }); };
+window.setVoiceLoop = async (mode) => { settings.voiceLoop = (mode === 'loop'); await update(ref(db, DB_PATH + '/settings'), { voiceLoop: settings.voiceLoop }); renderTabContent(); };
+window.saveVoice = async () => { const txt = document.getElementById('voiceText').value.trim(); settings.voiceText = txt; settings.voiceEnabled = !!txt; await update(ref(db, DB_PATH + '/settings'), { voiceText: txt, voiceEnabled: !!txt }); window.notif('✅ Đã lưu giọng đọc!'); };
+window.testVoice = () => { const txt = document.getElementById('voiceText').value.trim(); if (!txt) return window.notif('Nhập câu trước!', true); speakText(txt, false); };
+
+function speakText(txt, isLoop) {
+  if (!('speechSynthesis' in window)) return window.notif('Trình duyệt không hỗ trợ!', true);
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(txt);
+  u.lang = 'vi-VN'; u.rate = settings.voiceRate || 1; u.pitch = settings.voicePitch || 1;
+  if (selectedVoice) u.voice = selectedVoice;
+  u.onstart = () => { voiceSpeaking = true; document.getElementById('musicBtn').textContent = '🗣️'; const pv = document.getElementById('voicePreviewBox'); if (pv) { pv.style.display = 'block'; document.getElementById('voicePreviewText').textContent = txt; } };
+  u.onend = () => { voiceSpeaking = false; if (isLoop && settings.voiceLoop) setTimeout(() => speakText(txt, true), 2000); else { document.getElementById('musicBtn').textContent = '🔇'; const pv = document.getElementById('voicePreviewBox'); if (pv) pv.style.display = 'none'; } };
+  speechSynthesis.speak(u);
+}
+window.stopVoice = () => { if ('speechSynthesis' in window) speechSynthesis.cancel(); voiceSpeaking = false; document.getElementById('musicBtn').textContent = '🔇'; };
+
+// BACKGROUND + LOGO
+window.changeLogoSize = async (v) => { settings.logoSize = parseInt(v); document.getElementById('logoSizeVal').textContent = v + 'px'; applyLogoStyle(); await update(ref(db, DB_PATH + '/settings'), { logoSize: settings.logoSize }); };
+window.changeLogoPos = async (axis, v) => { if (axis === 'x') settings.logoPosX = parseInt(v); else settings.logoPosY = parseInt(v); applyLogoStyle(); await update(ref(db, DB_PATH + '/settings'), { logoPosX: settings.logoPosX, logoPosY: settings.logoPosY }); };
+window.resetLogoPos = async () => { settings.logoPosX = 50; settings.logoPosY = 50; settings.logoSize = 130; applyLogoStyle(); await update(ref(db, DB_PATH + '/settings'), { logoPosX: 50, logoPosY: 50, logoSize: 130 }); renderTabContent(); window.notif('Đã reset!'); };
+window.setBgSize = async (sz) => { settings.bgSize = sz; applyBackground(); await update(ref(db, DB_PATH + '/settings'), { bgSize: sz }); renderTabContent(); };
+window.setBgPos = async (x, y) => { settings.bgPosX = x; settings.bgPosY = y; applyBackground(); await update(ref(db, DB_PATH + '/settings'), { bgPosX: x, bgPosY: y }); renderTabContent(); window.notif('Đã canh ảnh!'); };
+window.changeBgZoom = async (v) => { settings.bgZoom = parseInt(v); document.getElementById('zoomVal').textContent = v + '%'; applyBackground(); await update(ref(db, DB_PATH + '/settings'), { bgZoom: settings.bgZoom }); };
+window.setBgType = async (type) => { settings.bgType = type; if (type === 'stars') settings.bgValue = ''; await update(ref(db, DB_PATH + '/settings'), { bgType: type, bgValue: settings.bgValue }); applyBackground(); renderTabContent(); window.notif('Đã đổi kiểu nền!'); };
+window.setBgColor = async (col) => { settings.bgType = 'color'; settings.bgValue = col; await update(ref(db, DB_PATH + '/settings'), { bgType: 'color', bgValue: col }); applyBackground(); renderTabContent(); window.notif('🎨 Đã đổi màu nền!'); };
+window.saveBgUrl = async () => { const url = document.getElementById('bgUrl').value.trim(); if (!url) return window.notif('Nhập link ảnh', true); settings.bgType = 'image'; settings.bgValue = url; await update(ref(db, DB_PATH + '/settings'), { bgType: 'image', bgValue: url }); applyBackground(); renderTabContent(); window.notif('✅ Đã lưu ảnh nền!'); };
+window.uploadBg = async (inp) => { const f = inp.files[0]; if (!f) return; window.notif('⏳ Đang tải ảnh...'); try { const url = await uploadToImgBB(f); settings.bgType = 'image'; settings.bgValue = url; await update(ref(db, DB_PATH + '/settings'), { bgType: 'image', bgValue: url }); applyBackground(); renderTabContent(); window.notif('✅ Đã up ảnh nền!'); } catch(e) { window.notif('Lỗi: ' + e.message, true); } };
+window.resetBg = async () => { if (!confirm('Reset nền về mặc định?')) return; settings.bgType = 'stars'; settings.bgValue = ''; settings.bgSize = 'cover'; settings.bgPosX = 'center'; settings.bgPosY = 'center'; settings.bgZoom = 100; await update(ref(db, DB_PATH + '/settings'), settings); applyBackground(); renderTabContent(); window.notif('Đã reset nền'); };
+window.pickTheme = async (themeId) => { settings.theme = themeId; applyTheme(themeId); await update(ref(db, DB_PATH + '/settings'), { theme: themeId }); window.notif('🎨 Đã đổi màu!'); renderTabContent(); };
+window.saveInfo = async () => { const name = document.getElementById('setName').value.trim(); const tagline = document.getElementById('setTagline').value.trim(); const desc = document.getElementById('setDesc').value.trim(); if (!name) return window.notif('Nhập tên', true); await update(ref(db, DB_PATH + '/settings'), { name, tagline, desc }); settings.name = name; settings.tagline = tagline; settings.desc = desc; window.notif('Đã lưu!'); render(); };
+
+async function uploadToImgBB(file){
+  const fd = new FormData(); fd.append('image', file);
+  const r = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_KEY}`, { method:'POST', body:fd });
+  const d = await r.json();
+  if (d.success) return d.data.url;
+  throw new Error('Lỗi upload');
+}
+
+window.uploadLogo = async (inp) => { const f = inp.files[0]; if (!f) return; window.notif('⏳ Đang tải...'); try { const url = await uploadToImgBB(f); await update(ref(db, DB_PATH + '/settings'), { logo: url }); settings.logo = url; render(); renderTabContent(); window.notif('✅ Đã đổi logo!'); } catch(e) { window.notif('Lỗi: ' + e.message, true); } };
+window.saveLogoUrl = async () => { const url = document.getElementById('logoUrl').value.trim(); await update(ref(db, DB_PATH + '/settings'), { logo: url }); settings.logo = url; render(); renderTabContent(); window.notif('Đã lưu!'); };
+window.removeLogo = async () => { if (!confirm('Xóa logo?')) return; await update(ref(db, DB_PATH + '/settings'), { logo: '' }); settings.logo = ''; render(); renderTabContent(); window.notif('Đã xóa'); };
+window.onLinkTypeChange = () => { const t = document.getElementById('linkType').value; selectedIcon = TYPE_ICON[t] || '🔗'; selectedIconColor = t === 'zalo-group' ? 'group' : t; renderIconPicker(); };
+
+function renderIconPicker(){
+  const c = document.getElementById('iconPicker');
+  if (!c) return;
+  c.innerHTML = ICONS.map(i => `<button onclick="pickIcon('${i.e}','${i.c}')" class="${selectedIcon===i.e?'selected':''}">${i.e}</button>`).join('');
+}
+window.pickIcon = (emoji, color) => { selectedIcon = emoji; selectedIconColor = color; document.getElementById('linkCustomIcon').value = ''; renderIconPicker(); };
+window.selectCustomIcon = (val) => { if (val.trim()) { selectedIcon = val.trim(); selectedIconColor = 'custom'; renderIconPicker(); } };
+
+window.openLinkEdit = (id) => {
+  editingLinkId = id;
+  if (id) {
+    const l = settings.links.find(x => x.id === id);
+    document.getElementById('linkEditTitle').textContent = '✏️ Sửa link';
+    document.getElementById('linkType').value = l.type || 'link';
+    document.getElementById('linkName').value = l.name || '';
+    document.getElementById('linkUrl').value = l.url || '';
+    selectedIcon = l.icon || '🔗'; selectedIconColor = l.iconColor || l.type;
+    document.getElementById('linkCustomIcon').value = '';
+  } else {
+    document.getElementById('linkEditTitle').textContent = '➕ Thêm link';
+    document.getElementById('linkType').value = 'facebook';
+    document.getElementById('linkName').value = '';
+    document.getElementById('linkUrl').value = '';
+    selectedIcon = '📘'; selectedIconColor = 'facebook';
+    document.getElementById('linkCustomIcon').value = '';
+  }
+  renderIconPicker();
+  document.getElementById('linkEditModal').classList.add('show');
+};
+
+window.saveLink = async () => {
+  const type = document.getElementById('linkType').value;
+  const name = document.getElementById('linkName').value.trim();
+  let url = document.getElementById('linkUrl').value.trim();
+  if (!name || !url) return window.notif('Nhập đủ tên và link', true);
+  const phoneClean = url.replace(/[^0-9+]/g, '');
+  const isPhoneInput = /^[0-9+\s]+$/.test(url);
+  if (type === 'phone') { if (!url.startsWith('tel:')) url = 'tel:' + phoneClean; }
+  else if (type === 'zalo' || type === 'zalo-group') {
+    if (url.startsWith('tel:')) url = url.replace('tel:', '');
+    if (isPhoneInput || /^[0-9+\s]+$/.test(url)) url = 'https://zalo.me/' + url.replace(/\s/g, '');
+    else if (!url.startsWith('http')) url = 'https://' + url;
+  } else if (type === 'gmail') { if (!url.startsWith('mailto:') && !url.startsWith('http')) url = 'mailto:' + url; }
+  else { if (!url.startsWith('http') && !url.startsWith('mailto:') && !url.startsWith('tel:')) url = 'https://' + url; }
+  const icon = selectedIcon || TYPE_ICON[type] || '🔗';
+  const iconColor = selectedIconColor || type;
+  if (editingLinkId) { await update(ref(db, DB_PATH + '/links/' + editingLinkId), { type, name, url, icon, iconColor }); window.notif('✅ Đã sửa!'); }
+  else { await push(ref(db, DB_PATH + '/links'), { type, name, url, icon, iconColor, order: Date.now() }); window.notif('✅ Đã thêm!'); }
+  closeModal('linkEditModal');
+  setTimeout(() => renderTabContent(), 400);
+};
+
+window.deleteLink = async (id) => { if (!confirm('Xóa link này?')) return; await remove(ref(db, DB_PATH + '/links/' + id)); window.notif('Đã xóa'); setTimeout(() => renderTabContent(), 400); };
+window.saveMusic = async () => { const url = document.getElementById('musicUrl').value.trim(); await update(ref(db, DB_PATH + '/settings'), { music: url }); settings.music = url; window.notif('Đã lưu nhạc!'); renderTabContent(); };
+window.removeMusic = async () => { if (!confirm('Xóa nhạc?')) return; await update(ref(db, DB_PATH + '/settings'), { music: '' }); settings.music = ''; window.notif('Đã xóa'); renderTabContent(); };
+
+const audio = new Audio(); audio.loop = true;
+window.toggleMusic = () => {
+  const btn = document.getElementById('musicBtn');
+  if (settings.voiceText && settings.voiceEnabled) { if (voiceSpeaking) { stopVoice(); return; } speakText(settings.voiceText, settings.voiceLoop); return; }
+  if (!settings.music) return window.notif('Chưa có nhạc!', true);
+  if (musicPlaying) { audio.pause(); musicPlaying = false; btn.textContent = '🔇'; btn.classList.remove('playing'); }
+  else { audio.src = settings.music; audio.play().then(() => { musicPlaying = true; btn.textContent = '🔊'; btn.classList.add('playing'); }).catch(e => window.notif('Lỗi nhạc: ' + e.message, true)); }
+};
+
+render();
+renderIconPicker();
+</script>
+</body>
+</html>
